@@ -10,6 +10,7 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name + '/launch', ['launch/path_planning.launch.py']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -28,6 +29,8 @@ setup(
         'bcd_planner = robot_mission_node.bcd_planner:main',
         'obstacle_marker = robot_mission_node.obstacle_marker:main',
         'mqtt_node = robot_mission_node.mqtt_node:main',
+        'local_to_geo = robot_mission_node.local_to_geo:main',
+        'mqtt_robot_location = robot_mission_node.mqtt_robot_location:main',
 
         ],
     },
