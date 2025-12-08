@@ -1,78 +1,3 @@
-# import rclpy
-# from rclpy.node import Node
-# from nav_msgs.msg import Path
-# from visualization_msgs.msg import Marker
-
-# class SweepingMarker(Node):
-#     def __init__(self):
-#         super().__init__('sweeping_marker')
-
-#         self.path_sub = self.create_subscription(Path, '/cleaning_coverage_path', self.path_cb, 10)
-#         self.marker_pub = self.create_publisher(Marker, '/robot_marker', 10)
-
-#         self.coverage_points = []
-#         self.index = 0
-#         self.path_received = False  # Track first reception
-
-#         self.timer = self.create_timer(0.1, self.publish_marker)
-#         self.get_logger().info("Sweeping marker node started")
-
-#     def path_cb(self, msg):
-#         new_points = [(p.pose.position.x, p.pose.position.y) for p in msg.poses]
-
-#         # Only update if path changed
-#         if new_points != self.coverage_points:
-#             self.coverage_points = new_points
-#             if not self.path_received:
-#                 self.index = 0
-#                 self.path_received = True
-#             self.get_logger().info(f"Received coverage sweep path with {len(self.coverage_points)} points")
-
-#     def publish_marker(self):
-#         if not self.coverage_points:
-#             return
-
-#         x, y = self.coverage_points[self.index]
-
-#         marker = Marker()
-#         marker.header.frame_id = "odom"
-#         marker.header.stamp = self.get_clock().now().to_msg()
-#         marker.ns = "sweep_robot"
-#         marker.id = 0
-#         marker.type = Marker.CUBE
-#         marker.action = Marker.ADD
-
-#         marker.pose.position.x = x
-#         marker.pose.position.y = y
-#         marker.pose.position.z = 0.1
-#         marker.pose.orientation.w = 1.0
-
-#         marker.scale.x = 0.2
-#         marker.scale.y = 0.2
-#         marker.scale.z = 0.2
-
-#         marker.color.a = 1.0
-#         marker.color.r = 0.2
-#         marker.color.g = 0.2
-#         marker.color.b = 1.0
-
-#         self.marker_pub.publish(marker)
-
-#         # Increment index, stop at last point
-#         if self.index < len(self.coverage_points) - 1:
-#             self.index += 1
-
-# def main(args=None):
-#     rclpy.init(args=args)
-#     node = SweepingMarker()
-#     rclpy.spin(node)
-#     node.destroy_node()
-#     rclpy.shutdown()
-
-# if __name__ == "__main__":
-#     main()
-
-
 #!/usr/bin/env python3
 import math
 from typing import List, Tuple, Optional
@@ -97,12 +22,11 @@ class SweepingMarker(Node):
     def __init__(self):
         super().__init__('sweeping_marker_fixed')
 
-        # Parameters (tweak at runtime with ros2 param set)
-        self.declare_parameter("speed_m_s", 0.5)           # linear speed along path (m/s)
-        self.declare_parameter("timer_hz", 20.0)           # publish rate (Hz)
-        self.declare_parameter("loop_path", True)          # loop when end reached
-        self.declare_parameter("marker_scale", 0.2)        # cube size (m)
-        self.declare_parameter("use_path_orientation", False)  # prefer path pose.orientation if available
+        self.declare_parameter("speed_m_s", 0.5) 
+        self.declare_parameter("timer_hz", 20.0)         
+        self.declare_parameter("loop_path", True)
+        self.declare_parameter("marker_scale", 0.2) 
+        self.declare_parameter("use_path_orientation", False)
         self.declare_parameter("marker_ns", "sweep_robot")
         self.declare_parameter("marker_id", 0)
 
@@ -121,12 +45,12 @@ class SweepingMarker(Node):
         self.marker_pub = self.create_publisher(Marker, '/robot_marker', 10)
 
         # internal state for interpolation along path
-        self._points: List[Tuple[float, float]] = []   # list of (x,y)
-        self._poses_orientations: List[Optional[Quaternion]] = []  # optional orientations from Path
-        self._frame_id: str = "odom"  # fallback; replaced by incoming path header frame_id
-        self._seg_idx: int = 0        # current segment start index (from point i to i+1)
-        self._seg_progress: float = 0.0  # fraction [0..1] along current segment
-        self._seg_length: float = 0.0    # length of current segment (m)
+        self._points: List[Tuple[float, float]] = []  
+        self._poses_orientations: List[Optional[Quaternion]] = []
+        self._frame_id: str = "odom"
+        self._seg_idx: int = 0
+        self._seg_progress: float = 0.0
+        self._seg_length: float = 0.0
         self._last_update_time = self.get_clock().now()
         self.get_logger().info("SweepingMarker (fixed) started")
 
@@ -165,9 +89,7 @@ class SweepingMarker(Node):
         self._seg_idx = 0
         self._seg_progress = 0.0
         self._seg_length = 0.0
-        self._last_update_time = self.get_clock().now()
-
-        # prepare first segment length if there are at least 2 points
+        self._last_update_time = self.get_clock().now()=
         if len(self._points) >= 2:
             self._seg_length = self._compute_seg_length(self._seg_idx)
         else:
@@ -188,7 +110,6 @@ class SweepingMarker(Node):
         This advances across multiple segments if necessary.
         """
         if not self._points or len(self._points) == 1:
-            # nothing to advance or single stationary point
             return
 
         remaining = self.speed_m_s * max(0.0, dt)
@@ -247,7 +168,6 @@ class SweepingMarker(Node):
             yaw = 0.0
             return (x, y), yaw
 
-        # if at exact segment end, position is next point
         i = self._seg_idx
         p0 = self._points[i]
         p1 = self._points[i + 1]
@@ -255,7 +175,6 @@ class SweepingMarker(Node):
         x = p0[0] + (p1[0] - p0[0]) * t
         y = p0[1] + (p1[1] - p0[1]) * t
 
-        # Determine yaw: prefer path pose orientation at index i if requested and available
         if self.use_path_orientation:
             orient = self._poses_orientations[i] if i < len(self._poses_orientations) else None
             if orient:
@@ -264,7 +183,6 @@ class SweepingMarker(Node):
                                  1.0 - 2.0 * (orient.y * orient.y + orient.z * orient.z))
                 return (x, y), yaw
 
-        # otherwise, compute yaw from motion direction (p0 -> p1)
         dx = p1[0] - p0[0]
         dy = p1[1] - p0[1]
         if abs(dx) < 1e-9 and abs(dy) < 1e-9:
@@ -274,7 +192,6 @@ class SweepingMarker(Node):
         return (x, y), yaw
 
     def _timer_cb(self):
-        # compute dt since last update
         now = self.get_clock().now()
         dt = (now - self._last_update_time).nanoseconds * 1e-9
         self._last_update_time = now
@@ -319,7 +236,6 @@ class SweepingMarker(Node):
         self.marker_pub.publish(marker)
 
     def destroy_node(self):
-        # override to ensure clean shutdown if needed
         super().destroy_node()
 
 

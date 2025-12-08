@@ -11,7 +11,7 @@ def send_mission():
         return jsonify({"status": "error", "message": "Invalid mission"}), 400
 
     last_mission = data
-    print("\n📩 New Mission Received:", last_mission)
+    print("\nNew Mission Received:", last_mission)
     return jsonify({"status": "success", "data": last_mission})
 
 @app.route("/get_mission", methods=["GET"])
@@ -19,5 +19,5 @@ def get_mission():
     return jsonify({"status": "success", "data": last_mission})
 
 if __name__ == "__main__":
-    print("✅ Mission Server Running...")
+    print("Mission Server Running...")
     app.run(host="0.0.0.0", port=5000)

@@ -30,10 +30,10 @@ class MissionToPath(Node):
             for pt in poly:
                 pose = PoseStamped()
                 pose.header = path_msg.header
-                pose.pose.position.x = (pt["lon"] - poly[0]["lon"]) * 111000  # rough local conversion
+                pose.pose.position.x = (pt["lon"] - poly[0]["lon"]) * 111000 
                 pose.pose.position.y = (pt["lat"] - poly[0]["lat"]) * 111000
                 pose.pose.position.z = 0.0
-                pose.pose.orientation.w = 1.0  # neutral orientation
+                pose.pose.orientation.w = 1.0 
                 path_msg.poses.append(pose)
 
             self.publisher_.publish(path_msg)

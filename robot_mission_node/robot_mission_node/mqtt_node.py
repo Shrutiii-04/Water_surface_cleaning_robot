@@ -7,8 +7,8 @@ from std_msgs.msg import String
 
 BACKEND_URL = "http://51.21.101.122:3000"
 BROKER_IP = "51.21.101.122"
-ROBOT_ID = "robot_003"     # <-- change per robot
-MQTT_PASSWORD = "robot#003"  # <-- stored in Firestore
+ROBOT_ID = "robot_003"  
+MQTT_PASSWORD = "robot#003" 
 
 
 class MqttBridge(Node):
@@ -32,9 +32,7 @@ class MqttBridge(Node):
             self.get_logger().error("Failed to authenticate robot. Exiting.")
             exit(1)
 
-    # -----------------------------------------------------------
-    #  FETCH MQTT JWT TOKEN FROM BACKEND
-    # -----------------------------------------------------------
+    #  Fetch MQTT JWT token from backend
     def fetch_mqtt_token(self):
         self.get_logger().info("Requesting MQTT JWT token from backend...")
 
@@ -61,9 +59,7 @@ class MqttBridge(Node):
         self.jwt_token = data["token"]
         return True
 
-    # -----------------------------------------------------------
-    #  MQTT CONNECT
-    # -----------------------------------------------------------
+    #  MQTT connect
     def connect_mqtt(self):
         self.get_logger().info("Connecting to MQTT broker...")
 
@@ -80,9 +76,7 @@ class MqttBridge(Node):
         except Exception as e:
             self.get_logger().error(f"MQTT CONNECT ERROR: {e}")
 
-    # -----------------------------------------------------------
-    #  MQTT CALLBACKS
-    # -----------------------------------------------------------
+    #  MQTT callbacks
     def on_connect(self, client, userdata, flags, rc):
         if rc == 0:
             self.get_logger().info("MQTT connected successfully!")
@@ -94,8 +88,8 @@ class MqttBridge(Node):
 
     def on_disconnect(self, client, userdata, rc):
         self.get_logger().warn("MQTT disconnected. Reconnecting...")
-        self.fetch_mqtt_token()   # refresh token
-        self.connect_mqtt()       # reconnect
+        self.fetch_mqtt_token()  
+        self.connect_mqtt()   
 
     def on_message(self, client, userdata, msg):
         payload = msg.payload.decode()
@@ -105,12 +99,10 @@ class MqttBridge(Node):
         ros_msg.data = payload
         self.mission_pub.publish(ros_msg)
 
-    # -----------------------------------------------------------
     #  TELEMETRY → MQTT
-    # -----------------------------------------------------------
     def publish_telemetry(self):
         if self.client is None:
-            return  # MQTT not ready yet
+            return 
 
         telemetry = {
             "battery": 82,

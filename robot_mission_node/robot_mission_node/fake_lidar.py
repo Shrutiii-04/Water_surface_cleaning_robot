@@ -18,9 +18,9 @@ class FakeLiDAR(Node):
         scan.header.frame_id = "base_link"
 
         # LiDAR settings
-        scan.angle_min = -math.pi / 2      # -90 degrees
-        scan.angle_max = math.pi / 2       # +90 degrees
-        scan.angle_increment = math.pi / 180  # 1 degree resolution
+        scan.angle_min = -math.pi / 2
+        scan.angle_max = math.pi / 2
+        scan.angle_increment = math.pi / 180
         scan.range_min = 0.0
         scan.range_max = 5.0
 
