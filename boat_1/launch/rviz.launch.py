@@ -39,18 +39,20 @@ def generate_launch_description():
     urdf = os.path.join(pkg, 'urdf', 'boat_1.urdf')
 
     return LaunchDescription([
-        ExecuteProcess(
-            cmd=['ign', 'gazebo', '-r', 'empty.sdf'],
-            output='screen'
-        ),
-        ExecuteProcess(
-            cmd=['ros2', 'run', 'ros_ign_gazebo', 'create', '-file', urdf, '-name', 'boat_1'],
-            output='screen'
-        ),
+
         Node(
             package='robot_state_publisher',
             executable='robot_state_publisher',
-            parameters=[{'robot_description': open(urdf).read()}],
-            output='screen'
+            parameters=[{'robot_description': open(urdf).read()}]
         ),
+
+        Node(
+            package='joint_state_publisher_gui',
+            executable='joint_state_publisher_gui'
+        ),
+
+        Node(
+            package='rviz2',
+            executable='rviz2'
+        )
     ])
