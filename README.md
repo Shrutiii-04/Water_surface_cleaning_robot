@@ -12,7 +12,7 @@ This repository contains the software stack for an autonomous water surface clea
 
 - ROS 2 (Jazzy / Humble compatible)
 - Python
-- MQTT (Paho client)
+- MQTT (EMQX)
 
 ## Setup Instructions
 ### Prerequisites
