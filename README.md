@@ -39,3 +39,4 @@ source ~/wscr_ws/install/setup.bash
 
 # Run the server and start ROS2 Nodes
 ros2 launch robot_mission_node path_planning.launch.py
+ros2 launch boat_1 rviz.launch.py
