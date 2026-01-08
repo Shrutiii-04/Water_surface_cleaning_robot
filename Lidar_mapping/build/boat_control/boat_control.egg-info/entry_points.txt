@@ -1,0 +1,10 @@
+[console_scripts]
+absolute_mapper = boat_control.absolute_mapper:main
+auto_explorer = boat_control.auto_explorer:main
+auto_wander = boat_control.auto_wander:main
+dwa_explorer = boat_control.dwa_explorer:main
+lidar_explorer = boat_control.lidar_explorer:main
+pose_to_tf = boat_control.pose_to_tf:main
+smart_explorer = boat_control.smart_explorer:main
+teleop = boat_control.boat_teleop:main
+

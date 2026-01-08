@@ -1,0 +1,204 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="boat_world">
+
+    <!-- Physics -->
+    <physics name="1ms" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <!-- Core Gazebo systems -->
+    <plugin filename="ignition-gazebo-physics-system"
+            name="ignition::gazebo::systems::Physics"/>
+    <plugin filename="ignition-gazebo-user-commands-system"
+            name="ignition::gazebo::systems::UserCommands"/>
+    <plugin filename="ignition-gazebo-scene-broadcaster-system"
+            name="ignition::gazebo::systems::SceneBroadcaster"/>
+
+    <!-- Buoyancy plugin -->
+    <plugin filename="ignition-gazebo-buoyancy-system"
+            name="ignition::gazebo::systems::Buoyancy">
+      <graded_buoyancy>
+        <default_density>1000</default_density>
+       <density_change>
+          <above_depth>0</above_depth>
+          <density>1</density>
+          .
+        </density_change> 
+      </graded_buoyancy>
+
+      <!-- ENABLE BOAT -->
+      <enable>boat_1::hull_1</enable>
+
+    </plugin>
+
+    <plugin filename="ignition-gazebo-sensors-system"
+        name="ignition::gazebo::systems::Sensors">
+        <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <!-- Sun Light -->
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>1 1 1 1</diffuse>
+      <specular>0.5 0.5 0.5 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- Water plane at z=0 -->
+    <model name="water_plane">
+      <static>true</static>
+      <link name="link">
+        <visual name="water_plane">
+          <geometry>
+            <plane>
+              <size>200 200</size>
+              <normal>0 0 1</normal>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0 0 1 0.5</ambient>
+            <diffuse>0 0 1 0.5</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <include>
+        <uri>model://envarment</uri>
+        <name>my_model</name>
+        <pose>0 0 0 0 0 0</pose>
+    </include>
+
+      <include>
+          <uri>model://boat_1</uri>
+          <pose>0 0 0 0 0 0</pose> <!-- position it 2 m on X, same depth as other boat -->
+      </include>
+
+    <!-- FLOATING OBSTACLES FOR LIDAR DETECTION  -->
+    
+    <!-- Obstacle 1: Floating Buoy -->
+    <model name="obstacle_buoy_1">
+      <static>true</static>
+      <pose>8 5 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><cylinder><radius>0.5</radius><length>2.0</length></cylinder></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><cylinder><radius>0.5</radius><length>2.0</length></cylinder></geometry>
+          <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Obstacle 2: Floating Buoy -->
+    <model name="obstacle_buoy_2">
+      <static>true</static>
+      <pose>-6 8 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><cylinder><radius>0.6</radius><length>2.0</length></cylinder></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><cylinder><radius>0.6</radius><length>2.0</length></cylinder></geometry>
+          <material><ambient>1 0.5 0 1</ambient><diffuse>1 0.5 0 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Obstacle 3: Floating Box/Crate -->
+    <model name="obstacle_crate_1">
+      <static>true</static>
+      <pose>10 -8 0.5 0 0 0.3</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>2 2 2</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>2 2 2</size></box></geometry>
+          <material><ambient>0.6 0.4 0.2 1</ambient><diffuse>0.6 0.4 0.2 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Obstacle 4: Small Island/Rock -->
+    <model name="obstacle_rock_1">
+      <static>true</static>
+      <pose>-10 -5 0.3 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><sphere><radius>1.5</radius></sphere></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><sphere><radius>1.5</radius></sphere></geometry>
+          <material><ambient>0.4 0.4 0.4 1</ambient><diffuse>0.5 0.5 0.5 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Obstacle 5: Floating Platform -->
+    <model name="obstacle_platform_1">
+      <static>true</static>
+      <pose>5 -12 0.3 0 0 0.5</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>3 1.5 1</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>3 1.5 1</size></box></geometry>
+          <material><ambient>0.3 0.5 0.3 1</ambient><diffuse>0.3 0.6 0.3 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Obstacle 6: Another Buoy -->
+    <model name="obstacle_buoy_3">
+      <static>true</static>
+      <pose>-5 -10 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><cylinder><radius>0.4</radius><length>1.5</length></cylinder></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><cylinder><radius>0.4</radius><length>1.5</length></cylinder></geometry>
+          <material><ambient>1 1 0 1</ambient><diffuse>1 1 0 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Obstacle 7: Large floating debris -->
+    <model name="obstacle_debris_1">
+      <static>true</static>
+      <pose>12 2 0.4 0 0 0.8</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>2.5 1 1.2</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>2.5 1 1.2</size></box></geometry>
+          <material><ambient>0.5 0.3 0.2 1</ambient><diffuse>0.5 0.3 0.2 1</diffuse></material>
+        </visual>
+      </link>0
+    </model>
+
+    <!-- Obstacle 8: Central obstacle -->
+    <model name="obstacle_center">
+      <static>true</static>
+      <pose>3 3 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><cylinder><radius>0.8</radius><length>2.0</length></cylinder></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><cylinder><radius>0.8</radius><length>2.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 1 1</ambient><diffuse>0 0.5 1 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+
+  </world>
+</sdf>

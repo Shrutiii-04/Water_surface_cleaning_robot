@@ -1,0 +1,24 @@
+[0.313s] Invoking command in '/home/vedanti/simuletion/build/boat_control': PYTHONPATH=/home/vedanti/simuletion/build/boat_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/vedanti/simuletion/install/boat_control/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/vedanti/simuletion/build/boat_control/build --no-deps symlink_data
+[0.445s] running develop
+[0.514s] running egg_info
+[0.515s] writing boat_control.egg-info/PKG-INFO
+[0.515s] writing dependency_links to boat_control.egg-info/dependency_links.txt
+[0.515s] writing entry points to boat_control.egg-info/entry_points.txt
+[0.515s] writing requirements to boat_control.egg-info/requires.txt
+[0.515s] writing top-level names to boat_control.egg-info/top_level.txt
+[0.516s] reading manifest file 'boat_control.egg-info/SOURCES.txt'
+[0.516s] writing manifest file 'boat_control.egg-info/SOURCES.txt'
+[0.517s] running build_ext
+[0.517s] Creating /home/vedanti/simuletion/install/boat_control/lib/python3.10/site-packages/boat-control.egg-link (link to .)
+[0.518s] Installing absolute_mapper script to /home/vedanti/simuletion/install/boat_control/lib/boat_control
+[0.518s] Installing auto_explorer script to /home/vedanti/simuletion/install/boat_control/lib/boat_control
+[0.518s] Installing auto_wander script to /home/vedanti/simuletion/install/boat_control/lib/boat_control
+[0.518s] Installing dwa_explorer script to /home/vedanti/simuletion/install/boat_control/lib/boat_control
+[0.518s] Installing lidar_explorer script to /home/vedanti/simuletion/install/boat_control/lib/boat_control
+[0.518s] Installing pose_to_tf script to /home/vedanti/simuletion/install/boat_control/lib/boat_control
+[0.518s] Installing smart_explorer script to /home/vedanti/simuletion/install/boat_control/lib/boat_control
+[0.518s] Installing teleop script to /home/vedanti/simuletion/install/boat_control/lib/boat_control
+[0.518s] 
+[0.518s] Installed /home/vedanti/simuletion/build/boat_control
+[0.518s] running symlink_data
+[0.537s] Invoked command in '/home/vedanti/simuletion/build/boat_control' returned '0': PYTHONPATH=/home/vedanti/simuletion/build/boat_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/vedanti/simuletion/install/boat_control/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/vedanti/simuletion/build/boat_control/build --no-deps symlink_data

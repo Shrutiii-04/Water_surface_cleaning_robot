@@ -1,0 +1,1 @@
+/home/vedanti/simuletion/build/boat_control/launch/auto_mapping.launch.py
