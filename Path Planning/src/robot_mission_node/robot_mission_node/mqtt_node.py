@@ -5,10 +5,10 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
 
-BACKEND_URL = "http://51.21.101.122:3000"
-BROKER_IP = "51.21.101.122"
-ROBOT_ID = "robot_003"  
-MQTT_PASSWORD = "robot#003" 
+BACKEND_URL = "http://server_ip_address:3000"
+BROKER_IP = "server_ip_address"
+ROBOT_ID = "robot_id_as_in_database"  
+MQTT_PASSWORD = "robot_password_as_in_database" 
 
 # MQTT Node
 class MqttBridge(Node):

@@ -42,7 +42,7 @@ router.post("/robot-mqtt-token", async (req, res) => {
       status: "ok",
       mqttUsername: data.mqttUsername,
       token,
-      mqttBroker: "mqtt://server_ip_address"
+      mqttBroker: "mqtt://server_ip_address:1883"
     });
 
   } catch (err) {

@@ -9,14 +9,14 @@ class RobotLocationMQTT(Node):
     def __init__(self):
         super().__init__('robot_location_mqtt')
 
-        self.robot_id = "robot_003"
+        self.robot_id = "robot_id_as_in_database"
 
         self.create_subscription(String, '/robot_gps', self.gps_cb, 10)
 
         self.client = mqtt.Client()
         try:
             # Connect to MQTT broker
-            self.client.connect("51.21.101.122", 3000)
+            self.client.connect("server_ip_address", 3000)
             self.client.loop_start()
             self.get_logger().info("MQTT Connected")
         except Exception as e:

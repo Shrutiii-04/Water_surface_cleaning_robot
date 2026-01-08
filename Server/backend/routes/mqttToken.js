@@ -41,7 +41,7 @@ router.post("/mqtt-token", async (req, res) => {
   return res.json({
     token,
     mqttUsername: data.mqttUsername,
-    mqttBroker: "mqtt://server_ip_address",
+    mqttBroker: "mqtt://server_ip_address:1883",
   });
 });
 

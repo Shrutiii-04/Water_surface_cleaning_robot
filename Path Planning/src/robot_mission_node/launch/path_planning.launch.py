@@ -16,27 +16,18 @@ def generate_launch_description():
             parameters=[{'robot_description': open(urdf_path).read()}],
             output='screen'
         ),
-
-        # Node(
-        #     package='joint_state_publisher_gui',
-        #     executable='joint_state_publisher_gui',
-        #     output='screen'
-        # ),
-
         Node(
             package='robot_mission_node',
             executable='bcd_planner',
             name='bcd_planner',
             output='screen'
         ),
-
         Node(
             package='robot_mission_node',
             executable='mqtt_node',
             name='mqtt_node',
             output='screen'
         ),
-
         Node(
             package='robot_mission_node',
             executable='fake_odom',
@@ -50,7 +41,6 @@ def generate_launch_description():
             name='path_follower',
             output='screen'
         ),
-
         Node(
             package='robot_mission_node',
             executable='local_to_geo',
@@ -63,13 +53,6 @@ def generate_launch_description():
             name='mqtt_robot_laocation',
             output='screen'
         ),
-        Node(
-            package='robot_mission_node',
-            executable='path_follower',
-            name='path_follower',
-            output='screen'
-        ),
-
         Node(
             package='rviz2',
             executable='rviz2',

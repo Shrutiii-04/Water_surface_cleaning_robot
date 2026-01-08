@@ -1,3 +1,0 @@
-[console_scripts]
-teleop = boat_control.boat_teleop:main
-
