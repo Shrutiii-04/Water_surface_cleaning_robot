@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1045798613776",
+    "project_id": "wscr-app",
+    "storage_bucket": "wscr-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045798613776:android:23556082177e7d0cbaeb95",
+        "android_client_info": {
+          "package_name": "com.example.water_surface_robot_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANefQ7YHDFcUeJYfIS6IF_WbzmSjURUqc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
