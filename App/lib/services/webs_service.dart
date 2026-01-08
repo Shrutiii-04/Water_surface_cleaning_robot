@@ -31,7 +31,7 @@ class WebsService {
       print("Connecting to WebSocket");
 
       _channel = WebSocketChannel.connect(
-        Uri.parse("ws://51.21.101.122:9000"),
+        Uri.parse("ws://Server_IP_Address:9000"),
       );
 
       _isConnected = true;

@@ -1,3 +1,3 @@
 class AppConfig {
-  static const backendBaseUrl = "http://51.21.101.122:3000";
+  static const backendBaseUrl = "http://Server_IP_Address:3000";
 }
