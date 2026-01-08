@@ -1,1 +1,0 @@
-/home/vedanti/simuletion/build/boat_control/launch/auto_bringup.launch.py
