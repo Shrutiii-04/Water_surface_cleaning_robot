@@ -1,18 +1,5 @@
-# Autonomous Water Surface Cleaning Robot
-
-## Project Overview:
-
-The Water Surface Cleaning Robot is an autonomous/semi-autonomous robotic system designed to remove floating waste such as plastic, leaves, and debris from water bodies including lakes, ponds, rivers, and reservoirs. The project aims to reduce water pollution while minimizing human effort and risk.
-This robot operates on the water surface using a propulsion system and a waste collection mechanism, making it suitable for environmental monitoring and cleaning applications.
-
 ## About this repository
 This repository contains the software stack for an autonomous water surface cleaning robot built using ROS 2. It includes coverage path planning, path following, odometry-based localization, GPS conversion, and MQTT-based cloud communication. The system allows users to select a cleaning area via a our application and autonomously execute the mission while streaming live location data.
-
-## Technologies Used
-
-- ROS 2 (Jazzy / Humble compatible)
-- Python
-- MQTT (EMQX)
 
 ## Setup Instructions
 ### Prerequisites
